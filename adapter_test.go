@@ -3,8 +3,8 @@ package string_adapter
 import (
 	"testing"
 
-	"github.com/casbin/casbin/v2"
-	"github.com/casbin/casbin/v2/model"
+	"github.com/parsable/casbin"
+	"github.com/parsable/casbin/model"
 )
 
 func Test_KeyMatchRbac(t *testing.T) {

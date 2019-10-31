@@ -1,5 +1,5 @@
-module github.com/qiangmzsx/string-adapter
+module github.com/parsable/string-adapter
 
-go 1.12
+go 1.13
 
-require github.com/casbin/casbin/v2 v2.1.0
+require github.com/parsable/casbin v0.0.11
