@@ -32,17 +32,15 @@ p, data_group_admin, /bob_data/*, POST
 g, alice, data_group_admin
 `
 	sa := NewAdapter(line)
-	md := model.NewModel()
-	err := md.LoadModelFromText(conf)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	e, _ := casbin.NewEnforcer(md, sa)
+	md := make(model.Model)
+
+	md.LoadModelFromText(conf)
+
+	e := casbin.NewEnforcer(md, sa)
 	sub := "alice"
 	obj := "/alice_data/login"
 	act := "POST"
-	if res, _ := e.Enforce(sub, obj, act); res != true {
+	if _, res := e.Enforce(sub, obj, act); res != true {
 		t.Error("**error**")
 	}
 }
@@ -71,17 +69,14 @@ p, data_group_admin, data3, write
 g, alice, data_group_admin
 `
 	sa := NewAdapter(line)
-	md := model.NewModel()
-	err := md.LoadModelFromText(conf)
-	if err != nil {
-		t.Error(err)
-		return
-	}
-	e, _ := casbin.NewEnforcer(md, sa)
+	md := make(model.Model)
+	md.LoadModelFromText(conf)
+
+	e := casbin.NewEnforcer(md, sa)
 	sub := "alice" // the user that wants to access a resource.
 	obj := "data1" // the resource that is going to be accessed.
 	act := "read"  // the operation that the user performs on the resource.
-	if res, _ := e.Enforce(sub, obj, act); res != true {
+	if _, res := e.Enforce(sub, obj, act); res != true {
 		t.Error("**error**")
 	}
 }
